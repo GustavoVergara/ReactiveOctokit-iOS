@@ -1,6 +1,6 @@
 //
 //  MasterViewController.swift
-//  myfreecommApplication
+//  ReactiveOctoKit
 //
 //  Created by Gustavo Vergara Garcia on 03/11/17.
 //  Copyright © 2017 Gustavo Vergara Garcia. All rights reserved.
@@ -47,7 +47,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
         self.viewModel.state.map({ $0.contains(.gettingNewPage) }).bind(to: self.loadingViewController.isLoading)
         self.viewModel.state.map({ !$0.contains([.gettingNewPage, .empty]) }).bind(to: self.loadingContainer.reactive.isHidden)
         
-        self.viewModel.repositories.bind(to: self.tableView, animated: false, createCell: self.createCell(with:at:for:)).dispose(in: self.bag)
+        self.viewModel.repositories.bind(to: self.tableView, animated: false, createCell: self.createCell(with:at:for:))
     }
 
     // MARK: - Segues

@@ -11,7 +11,7 @@ target 'ReactiveOctoKit' do
   pod 'Moya'
   pod 'Bond'
   
-  target 'myfreecommApplicationTests' do
+  target 'ReactiveOctoKitTests' do
       inherit! :search_paths
 
   end

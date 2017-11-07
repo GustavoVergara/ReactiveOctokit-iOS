@@ -1,17 +1,17 @@
 //
-//  myfreecommApplicationTests.swift
-//  myfreecommApplicationTests
+//  ReactiveOctoKitTests.swift
+//  ReactiveOctoKitTests
 //
 //  Created by Gustavo Vergara Garcia on 05/11/17.
 //  Copyright © 2017 Gustavo Vergara Garcia. All rights reserved.
 //
 
 import XCTest
-@testable import myfreecommApplication
+@testable import ReactiveOctoKit
 import Moya
 import Result
 
-class myfreecommApplicationTests: XCTestCase {
+class ReactiveOctoKitTests: XCTestCase {
     
     let gitHubSuccessProvider = MoyaProvider<GitHub>(
         endpointClosure: { target -> Endpoint<GitHub> in

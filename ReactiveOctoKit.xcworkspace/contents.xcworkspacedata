@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/gustavovergaragarcia/Documents/Workspace/iOS Projects/myfreecommApplication/ReactiveOctoKit.xcodeproj">
+      location = "group:ReactiveOctoKit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
