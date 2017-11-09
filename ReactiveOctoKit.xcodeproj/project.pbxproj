@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		47E8BF6D919FBDFCCEE24795 /* Pods_myfreecommApplicationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80934BF89F9122B5625DD4C9 /* Pods_myfreecommApplicationTests.framework */; };
-		6B0119532359D5247AE19F9B /* Pods_myfreecommApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F1389BB70B716C6B966C13 /* Pods_myfreecommApplication.framework */; };
 		9B11E4F71FAED8CC0036BAD7 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B11E4F61FAED8CC0036BAD7 /* LoadingViewController.swift */; };
 		9B11E4F91FAF6E780036BAD7 /* OptionSetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B11E4F81FAF6E780036BAD7 /* OptionSetExtensions.swift */; };
 		9B11E4FB1FAF81090036BAD7 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B11E4FA1FAF81090036BAD7 /* UITableViewExtension.swift */; };
@@ -31,11 +30,14 @@
 		9B92C6CC1FACA12400FBB992 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B92C6CB1FACA12400FBB992 /* SampleData.swift */; };
 		9B92C6CE1FACA91300FBB992 /* RepositorySearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B92C6CD1FACA91300FBB992 /* RepositorySearchResult.swift */; };
 		9B92C6D01FACB38F00FBB992 /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B92C6CF1FACB38F00FBB992 /* MasterViewModel.swift */; };
+		9B9644C21FB3FB0800CF2B6F /* ReactiveSwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9644C11FB3FB0800CF2B6F /* ReactiveSwiftExtensions.swift */; };
+		9B9C42F11FB4953800C31252 /* OptionSetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C42F01FB4953800C31252 /* OptionSetExtension.swift */; };
 		9BE133111FACC7B200B24133 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE133101FACC7B200B24133 /* Launch Screen.storyboard */; };
 		9BE133141FACE30B00B24133 /* MoyaExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE133131FACE30B00B24133 /* MoyaExtensions.swift */; };
-		9BE133161FACE34C00B24133 /* ReactiveKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE133151FACE34C00B24133 /* ReactiveKitExtensions.swift */; };
 		9BE133181FACE38500B24133 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE133171FACE38500B24133 /* CodableExtensions.swift */; };
 		9BE1331A1FACE3F000B24133 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE133191FACE3F000B24133 /* DateExtensions.swift */; };
+		C0B50030B684623A9B137952 /* Pods_ReactiveOctoKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B0669902D471863B0A9D6B /* Pods_ReactiveOctoKit.framework */; };
+		F53EC0637847CB48D67545AC /* Pods_ReactiveOctoKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADB1ACC256635E51E829646 /* Pods_ReactiveOctoKitTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,9 +52,14 @@
 
 /* Begin PBXFileReference section */
 		0A535D2994F56A447BB0DD3D /* Pods-myfreecommApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myfreecommApplication.debug.xcconfig"; path = "Pods/Target Support Files/Pods-myfreecommApplication/Pods-myfreecommApplication.debug.xcconfig"; sourceTree = "<group>"; };
+		31B0669902D471863B0A9D6B /* Pods_ReactiveOctoKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveOctoKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		418B18462006FA0D6C00DAC0 /* Pods-ReactiveOctoKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveOctoKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveOctoKitTests/Pods-ReactiveOctoKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		48AC2B67817261F2469812DA /* Pods-myfreecommApplicationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myfreecommApplicationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-myfreecommApplicationTests/Pods-myfreecommApplicationTests.release.xcconfig"; sourceTree = "<group>"; };
 		62085B472575DAAA530E5F69 /* Pods-myfreecommApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myfreecommApplication.release.xcconfig"; path = "Pods/Target Support Files/Pods-myfreecommApplication/Pods-myfreecommApplication.release.xcconfig"; sourceTree = "<group>"; };
+		7EF4A06BB571F8EAC91B350F /* Pods-ReactiveOctoKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveOctoKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveOctoKit/Pods-ReactiveOctoKit.debug.xcconfig"; sourceTree = "<group>"; };
 		80934BF89F9122B5625DD4C9 /* Pods_myfreecommApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myfreecommApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		914968BA68E3B28FBAEB0331 /* Pods-ReactiveOctoKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveOctoKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveOctoKit/Pods-ReactiveOctoKit.release.xcconfig"; sourceTree = "<group>"; };
+		990FB616FDE44BECA74AA57C /* Pods-ReactiveOctoKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveOctoKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveOctoKitTests/Pods-ReactiveOctoKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B11E4F61FAED8CC0036BAD7 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		9B11E4F81FAF6E780036BAD7 /* OptionSetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSetExtensions.swift; sourceTree = "<group>"; };
 		9B11E4FA1FAF81090036BAD7 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
@@ -79,13 +86,15 @@
 		9B92C6CB1FACA12400FBB992 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		9B92C6CD1FACA91300FBB992 /* RepositorySearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchResult.swift; sourceTree = "<group>"; };
 		9B92C6CF1FACB38F00FBB992 /* MasterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewModel.swift; sourceTree = "<group>"; };
+		9B9644C11FB3FB0800CF2B6F /* ReactiveSwiftExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveSwiftExtensions.swift; sourceTree = "<group>"; };
+		9B9C42F01FB4953800C31252 /* OptionSetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSetExtension.swift; sourceTree = "<group>"; };
 		9BE133101FACC7B200B24133 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		9BE133131FACE30B00B24133 /* MoyaExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaExtensions.swift; sourceTree = "<group>"; };
-		9BE133151FACE34C00B24133 /* ReactiveKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveKitExtensions.swift; sourceTree = "<group>"; };
 		9BE133171FACE38500B24133 /* CodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
 		9BE133191FACE3F000B24133 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		E1CB1ADE05025684B0763F1B /* Pods-myfreecommApplicationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myfreecommApplicationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-myfreecommApplicationTests/Pods-myfreecommApplicationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E9F1389BB70B716C6B966C13 /* Pods_myfreecommApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_myfreecommApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FADB1ACC256635E51E829646 /* Pods_ReactiveOctoKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveOctoKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47E8BF6D919FBDFCCEE24795 /* Pods_myfreecommApplicationTests.framework in Frameworks */,
+				F53EC0637847CB48D67545AC /* Pods_ReactiveOctoKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B0119532359D5247AE19F9B /* Pods_myfreecommApplication.framework in Frameworks */,
+				C0B50030B684623A9B137952 /* Pods_ReactiveOctoKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +123,8 @@
 			children = (
 				E9F1389BB70B716C6B966C13 /* Pods_myfreecommApplication.framework */,
 				80934BF89F9122B5625DD4C9 /* Pods_myfreecommApplicationTests.framework */,
+				31B0669902D471863B0A9D6B /* Pods_ReactiveOctoKit.framework */,
+				FADB1ACC256635E51E829646 /* Pods_ReactiveOctoKitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -243,11 +255,12 @@
 			isa = PBXGroup;
 			children = (
 				9BE133131FACE30B00B24133 /* MoyaExtensions.swift */,
-				9BE133151FACE34C00B24133 /* ReactiveKitExtensions.swift */,
 				9BE133171FACE38500B24133 /* CodableExtensions.swift */,
 				9BE133191FACE3F000B24133 /* DateExtensions.swift */,
 				9B11E4F81FAF6E780036BAD7 /* OptionSetExtensions.swift */,
 				9B11E4FA1FAF81090036BAD7 /* UITableViewExtension.swift */,
+				9B9644C11FB3FB0800CF2B6F /* ReactiveSwiftExtensions.swift */,
+				9B9C42F01FB4953800C31252 /* OptionSetExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -259,6 +272,10 @@
 				62085B472575DAAA530E5F69 /* Pods-myfreecommApplication.release.xcconfig */,
 				E1CB1ADE05025684B0763F1B /* Pods-myfreecommApplicationTests.debug.xcconfig */,
 				48AC2B67817261F2469812DA /* Pods-myfreecommApplicationTests.release.xcconfig */,
+				7EF4A06BB571F8EAC91B350F /* Pods-ReactiveOctoKit.debug.xcconfig */,
+				914968BA68E3B28FBAEB0331 /* Pods-ReactiveOctoKit.release.xcconfig */,
+				418B18462006FA0D6C00DAC0 /* Pods-ReactiveOctoKitTests.debug.xcconfig */,
+				990FB616FDE44BECA74AA57C /* Pods-ReactiveOctoKitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -379,7 +396,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-myfreecommApplication-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ReactiveOctoKit-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -392,28 +409,26 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-myfreecommApplication/Pods-myfreecommApplication-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveOctoKit/Pods-ReactiveOctoKit-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Bond/Bond.framework",
-				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/ReactiveKit/ReactiveKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bond.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differ.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-myfreecommApplication/Pods-myfreecommApplication-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveOctoKit/Pods-ReactiveOctoKit-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		58674D123FF23D16C0D97F08 /* [CP] Embed Pods Frameworks */ = {
@@ -428,7 +443,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-myfreecommApplicationTests/Pods-myfreecommApplicationTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveOctoKitTests/Pods-ReactiveOctoKitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7A2AB31E7845143C0EEF77F1 /* [CP] Check Pods Manifest.lock */ = {
@@ -442,7 +457,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-myfreecommApplicationTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ReactiveOctoKitTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -461,7 +476,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-myfreecommApplication/Pods-myfreecommApplication-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveOctoKit/Pods-ReactiveOctoKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C901938D55089BA1DA90CE81 /* [CP] Copy Pods Resources */ = {
@@ -476,7 +491,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-myfreecommApplicationTests/Pods-myfreecommApplicationTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveOctoKitTests/Pods-ReactiveOctoKitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -495,7 +510,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B92C6D01FACB38F00FBB992 /* MasterViewModel.swift in Sources */,
-				9BE133161FACE34C00B24133 /* ReactiveKitExtensions.swift in Sources */,
 				9B92C6C91FAC9E4900FBB992 /* GitHubProvider.swift in Sources */,
 				9B11E4FB1FAF81090036BAD7 /* UITableViewExtension.swift in Sources */,
 				9BE133141FACE30B00B24133 /* MoyaExtensions.swift in Sources */,
@@ -508,6 +522,7 @@
 				9BE133181FACE38500B24133 /* CodableExtensions.swift in Sources */,
 				9B92C6A11FAC147600FBB992 /* AppDelegate.swift in Sources */,
 				9B92C6BB1FAC1F3100FBB992 /* AppController.swift in Sources */,
+				9B9644C21FB3FB0800CF2B6F /* ReactiveSwiftExtensions.swift in Sources */,
 				9B92C6CC1FACA12400FBB992 /* SampleData.swift in Sources */,
 				9B92C6C11FAC230200FBB992 /* Milestone.swift in Sources */,
 				9B11E4F71FAED8CC0036BAD7 /* LoadingViewController.swift in Sources */,
@@ -515,6 +530,7 @@
 				9B92C6CE1FACA91300FBB992 /* RepositorySearchResult.swift in Sources */,
 				9B92C6C71FAC23B500FBB992 /* Label.swift in Sources */,
 				9B5575631FAD5C1800663BC0 /* DetailViewModel.swift in Sources */,
+				9B9C42F11FB4953800C31252 /* OptionSetExtension.swift in Sources */,
 				9B5575651FAEA03B00663BC0 /* PullRequest.swift in Sources */,
 				9B92C6C51FAC239C00FBB992 /* State.swift in Sources */,
 			);
@@ -544,7 +560,7 @@
 /* Begin XCBuildConfiguration section */
 		9B11E5141FAFB3330036BAD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1CB1ADE05025684B0763F1B /* Pods-myfreecommApplicationTests.debug.xcconfig */;
+			baseConfigurationReference = 418B18462006FA0D6C00DAC0 /* Pods-ReactiveOctoKitTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -561,7 +577,7 @@
 		};
 		9B11E5151FAFB3330036BAD7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 48AC2B67817261F2469812DA /* Pods-myfreecommApplicationTests.release.xcconfig */;
+			baseConfigurationReference = 990FB616FDE44BECA74AA57C /* Pods-ReactiveOctoKitTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -685,13 +701,13 @@
 		};
 		9B92C6B21FAC147600FBB992 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A535D2994F56A447BB0DD3D /* Pods-myfreecommApplication.debug.xcconfig */;
+			baseConfigurationReference = 7EF4A06BB571F8EAC91B350F /* Pods-ReactiveOctoKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PNRHBB5S44;
 				INFOPLIST_FILE = "$(SRCROOT)/Support Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = gvergara.ReactiveOctoKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -702,13 +718,13 @@
 		};
 		9B92C6B31FAC147600FBB992 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62085B472575DAAA530E5F69 /* Pods-myfreecommApplication.release.xcconfig */;
+			baseConfigurationReference = 914968BA68E3B28FBAEB0331 /* Pods-ReactiveOctoKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PNRHBB5S44;
 				INFOPLIST_FILE = "$(SRCROOT)/Support Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = gvergara.ReactiveOctoKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";

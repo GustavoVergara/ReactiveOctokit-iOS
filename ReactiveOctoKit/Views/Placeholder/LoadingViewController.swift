@@ -7,23 +7,24 @@
 //
 
 import UIKit
-import ReactiveKit
+import ReactiveSwift
 
 class LoadingViewController: UIViewController {
 
-    @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate weak var descriptionLabel: UILabel!
+    @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
     
-    lazy var text = Property<String>(self.descriptionLabel?.text ?? "")
+    lazy var text = MutableProperty<String>(self.descriptionLabel?.text ?? "")
     
-    lazy var isLoading = Property<Bool>(self.activityIndicator?.isAnimating ?? false)
+    lazy var isLoading = MutableProperty<Bool>(self.activityIndicator?.isAnimating ?? false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.text.bind(to: self.descriptionLabel.reactive.text)
-        self.isLoading.bind(to: self.activityIndicator.reactive.isAnimating)
+        
+        self.descriptionLabel.reactive.text <~ self.text
+        self.activityIndicator.reactive.isAnimating <~ self.isLoading
     }
     
 }

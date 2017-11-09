@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import Bond
-import ReactiveKit
 import AlamofireImage
+import ReactiveSwift
+import ReactiveCocoa
 
-class MasterViewController: UIViewController, UITableViewDelegate {
+class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingContainer: UIView!
@@ -33,6 +33,9 @@ class MasterViewController: UIViewController, UITableViewDelegate {
         
         self.viewModel.getNextPage()
         
+//        self.reactive.signal(for: #selector(UITableViewDataSource.tableView(_:numberOfRowsInSection:))).observeValues { stuff in
+//            print(stuff)
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,10 +47,10 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     }
     
     func makeBindings() {
-        self.viewModel.state.map({ $0.contains(.gettingNewPage) }).bind(to: self.loadingViewController.isLoading)
-        self.viewModel.state.map({ !$0.contains([.gettingNewPage, .empty]) }).bind(to: self.loadingContainer.reactive.isHidden)
+        self.loadingViewController.isLoading <~ self.viewModel.state.map({ $0.contains(.gettingNewPage) })
+        self.loadingContainer.reactive.isHidden <~ self.viewModel.state.map({ !$0.contains([.gettingNewPage, .empty]) })
         
-        self.viewModel.repositories.bind(to: self.tableView, animated: false, createCell: self.createCell(with:at:for:))
+        self.tableView.reactive.reloadData <~ self.viewModel.repositories.signal.map { _ in () }
     }
 
     // MARK: - Segues
@@ -59,7 +62,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
             case let detailViewController as DetailViewController:
                 guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
 
-                detailViewController.viewModel.repository.value = self.viewModel.repositories[selectedIndexPath.row]
+                detailViewController.viewModel.repository.value = self.viewModel.repositories.value[selectedIndexPath.row]
 
             default: break
             }
@@ -70,13 +73,21 @@ class MasterViewController: UIViewController, UITableViewDelegate {
 
     // MARK: - Table View
     
-    func createCell(with repositories: ObservableArray<Repository>, at indexPath: IndexPath, for tableView: UITableView) -> UITableViewCell {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.viewModel.repositories.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        cell.textLabel?.text = repositories[indexPath.row].name
-        cell.detailTextLabel?.text = repositories[indexPath.row].description
+        cell.textLabel?.text = self.viewModel.repositories.value[indexPath.row].name
+        cell.detailTextLabel?.text = self.viewModel.repositories.value[indexPath.row].description
         
-        if let avatarURL = repositories[indexPath.row].owner.avatarURL {
+        if let avatarURL = self.viewModel.repositories.value[indexPath.row].owner.avatarURL {
             let imageFilter = AspectScaledToFillSizeWithRoundedCornersFilter(size: CGSize(width: 44, height: 44), radius: 22)
             let placeholder = UIImage(named: "github-octocat")?.af_imageAspectScaled(toFit: CGSize(width: 44, height: 44))
             cell.imageView?.af_setImage(withURL: avatarURL, placeholderImage: placeholder, filter: imageFilter)
@@ -86,7 +97,7 @@ class MasterViewController: UIViewController, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (Double(indexPath.row) / Double(self.viewModel.repositories.endIndex)) > 0.7 {
+        if (Double(indexPath.row) / Double(self.viewModel.repositories.value.endIndex)) > 0.7 {
             self.viewModel.getNextPage()
         }
     }

@@ -8,20 +8,19 @@
 
 import Foundation
 import Moya
-import Bond
-import ReactiveKit
+import ReactiveSwift
 
 class DetailViewModel {
     
-    private let bag = DisposeBag()
+    private let bag = CompositeDisposable()
     
     // MARK: Observables
     
-    let repository = Observable<Repository?>(nil)
+    let repository = MutableProperty<Repository?>(nil)
             
-    let pullRequests = MutableObservableArray<PullRequest>()
+    let pullRequests = MutableProperty<[PullRequest]>([])
     
-    let state = Observable<State>([.noRepo, .empty])
+    let state = MutableProperty<State>([.noRepo, .empty])
     
     // MARK: Provider
     
@@ -35,21 +34,9 @@ class DetailViewModel {
     // MARK: Init
     
     init() {
-        self.repository.observeNext { repository in
-            if repository == nil {
-                self.state.value.insert(.noRepo)
-            } else {
-                self.state.value.remove(.noRepo)
-            }
-        }.dispose(in: self.bag)
-        
-        self.pullRequests.observeNext { pullRequests in
-            if self.pullRequests.count == 0 {
-                self.state.value.insert(.empty)
-            } else {
-                self.state.value.remove(.empty)
-            }
-        }.dispose(in: self.bag)
+        self.repository.signal.observeValues { [weak self] in self?.state.value.if($0 == nil, use: .noRepo) }?.add(to: self.bag)
+        self.repository.signal.skipNil().observeValues { [weak self] _ in self?.getNextPage() }
+        self.pullRequests.signal.observeValues { [weak self] in self?.state.value.if($0.isEmpty, use: .empty) }?.add(to: self.bag)
     }
     
     // MARK: - Methods
@@ -67,30 +54,21 @@ class DetailViewModel {
     private func getPullRequests(at page: Int) {
         guard let repository = self.repository.value else { return }
         self.state.value.insert(.gettingNewPage)
-        self.gitHubAPI.request(.pullRequests(repository: repository, page: page, pageSize: 100)) { result in
-            self.state.value.remove(.gettingNewPage)
-            do {
-                let response = try result.dematerialize()
-                
-                let pullRequests: [PullRequest]
-                if #available(iOS 10.0, *) {
-                    pullRequests = try response.map([PullRequest].self, using: JSONDecoder(dateDecodingStrategy: .iso8601))
-                } else {
-                    pullRequests = try response.map([PullRequest].self, using: JSONDecoder(dateDecodingStrategy: .formatted(.iso8601)))
-                }
-                
+        
+        self.gitHubAPI.reactive
+            .request(.pullRequests(repository: repository, page: page, pageSize: 100))
+            .map([PullRequest].self, using: JSONDecoder(dateDecodingStrategy: .iso8601))
+            .start { signal in
+                self.state.value.remove(.gettingNewPage)
+                guard case let .value(pullRequests) = signal.event else { return }
+
                 self.currentPage = page
                 
-                if pullRequests.count < 100 {
-                    self.state.value.insert(.loadedAllPages)
-                }
+                self.state.value.if(pullRequests.count < 100, use: .loadedAllPages)
                 
-                self.pullRequests.append(contentsOf: pullRequests)
-                
-            } catch {
-                print(error)
+                self.pullRequests.value.append(contentsOf: pullRequests)
             }
-        }
+            .add(to: self.bag)
     }
     
     // MARK: -

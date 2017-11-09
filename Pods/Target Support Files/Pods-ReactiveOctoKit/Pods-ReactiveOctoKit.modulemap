@@ -1,0 +1,6 @@
+framework module Pods_ReactiveOctoKit {
+  umbrella header "Pods-ReactiveOctoKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

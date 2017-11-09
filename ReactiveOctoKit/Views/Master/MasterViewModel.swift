@@ -9,18 +9,20 @@
 import Foundation
 import UIKit
 import Moya
-import Bond
-import ReactiveKit
+import ReactiveSwift
+import ReactiveCocoa
 
 class MasterViewModel {
     
-    let bag = DisposeBag()
-    
+    private let bag = CompositeDisposable()
+
     // MARK: Observables
     
-    let repositories = MutableObservableArray<Repository>()
+    let repositories = MutableProperty<[Repository]>([])
+    //MutableObservableArray<Repository>()
     
-    let state = Observable<State>([.empty])
+    let state = MutableProperty<State>([.empty])
+//        Observable<State>([.empty])
     
     // MARK: Provider
     
@@ -30,16 +32,10 @@ class MasterViewModel {
     
     private var currentPage: Int = 0
     
-    // MARL: Init
+    // MARK: Init
     
     init() {
-        self.repositories.observeNext { repositories in
-            if self.repositories.count == 0 {
-                self.state.value.insert(.empty)
-            } else {
-                self.state.value.remove(.empty)
-            }
-        }.dispose(in: self.bag)
+        self.repositories.signal.observeValues { self.state.value.if($0.isEmpty, use: .empty) }?.add(to: self.bag)
     }
     
     // MARK: - Methods
@@ -54,33 +50,23 @@ class MasterViewModel {
     
     // MARK: Private
     
+    
     private func getRepos(at page: Int) {
         self.state.value.insert(.gettingNewPage)
-        self.gitHubAPI.request(.searchRepository(language: .java, page: page, pageSize: 100)) { result in
-            self.state.value.remove(.gettingNewPage)
-            do {
-                let response = try result.dematerialize()
-                
-                let searchResult: RepositorySearchResult
-                if #available(iOS 10.0, *) {
-                    searchResult = try response.map(RepositorySearchResult.self, using: JSONDecoder(dateDecodingStrategy: .iso8601))
-                } else {
-                    searchResult = try response.map(RepositorySearchResult.self, using: JSONDecoder(dateDecodingStrategy: .formatted(.iso8601)))
-                }
-                
+        self.gitHubAPI.reactive
+            .request(.searchRepository(language: .java, page: page, pageSize: 100))
+            .map(RepositorySearchResult.self, using: JSONDecoder(dateDecodingStrategy: .iso8601))
+            .start { signal in
+                self.state.value.remove(.gettingNewPage)
+                guard case let .value(searchResult) = signal.event else { return }
+
                 self.currentPage = page
-                if self.repositories.count >= searchResult.totalCount {
-                    self.state.value.insert(.loadedAllPages)
-                } else {
-                    self.state.value.remove(.loadedAllPages)
-                }
                 
-                self.repositories.append(contentsOf: searchResult.items)
-            } catch {
-                print(error)
+                self.state.value.if(self.repositories.value.count >= searchResult.totalCount, use: .loadedAllPages)
+                
+                self.repositories.value.append(contentsOf: searchResult.items)
             }
-            
-        }
+            .add(to: self.bag)
     }
 
     // MARK: -
