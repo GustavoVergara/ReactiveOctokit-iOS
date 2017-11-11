@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import ReactiveSwift
 
-extension Disposable {
-    
-    func add(to compositeDisposable: CompositeDisposable) {
-        compositeDisposable.add(self)
-    }
-    
-}
+//extension Disposable {
+//    
+//    func add(to compositeDisposable: CompositeDisposable) {
+//        compositeDisposable.add(self)
+//    }
+//    
+//}
+

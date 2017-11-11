@@ -72,10 +72,6 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BJt-MO-vG3" id="EQo-Tt-tPr"/>
-                                    <outlet property="delegate" destination="BJt-MO-vG3" id="v2K-UY-FyC"/>
-                                </connections>
                             </tableView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZn-vs-zTX">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
@@ -219,10 +215,6 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="JEX-9P-axG" id="YBT-PN-b7I"/>
-                                    <outlet property="delegate" destination="JEX-9P-axG" id="m2s-oJ-r7T"/>
-                                </connections>
                             </tableView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tQW-cM-gUx">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
@@ -336,7 +328,7 @@
         <image name="git-watcher" width="205" height="205"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3KJ-ID-I3F"/>
+        <segue reference="ifi-7H-aMz"/>
         <segue reference="737-Yi-myG"/>
     </inferredMetricsTieBreakers>
 </document>

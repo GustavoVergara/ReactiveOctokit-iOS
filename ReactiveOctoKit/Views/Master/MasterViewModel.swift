@@ -9,20 +9,17 @@
 import Foundation
 import UIKit
 import Moya
-import ReactiveSwift
-import ReactiveCocoa
+import RxSwift
 
 class MasterViewModel {
     
-    private let bag = CompositeDisposable()
+    private let bag = DisposeBag()
 
     // MARK: Observables
     
-    let repositories = MutableProperty<[Repository]>([])
-    //MutableObservableArray<Repository>()
+    let repositories = Variable<[Repository]>([])
     
-    let state = MutableProperty<State>([.empty])
-//        Observable<State>([.empty])
+    let state = Variable<State>([.empty])
     
     // MARK: Provider
     
@@ -35,7 +32,9 @@ class MasterViewModel {
     // MARK: Init
     
     init() {
-        self.repositories.signal.observeValues { self.state.value.if($0.isEmpty, use: .empty) }?.add(to: self.bag)
+        self.repositories.asObservable()
+            .subscribe(onNext: { self.state.value.if($0.isEmpty, use: .empty) })
+            .disposed(by: self.bag)
     }
     
     // MARK: - Methods
@@ -50,23 +49,22 @@ class MasterViewModel {
     
     // MARK: Private
     
-    
     private func getRepos(at page: Int) {
         self.state.value.insert(.gettingNewPage)
-        self.gitHubAPI.reactive
+        self.gitHubAPI.rx
             .request(.searchRepository(language: .java, page: page, pageSize: 100))
             .map(RepositorySearchResult.self, using: JSONDecoder(dateDecodingStrategy: .iso8601))
-            .start { signal in
+            .subscribe { event in
                 self.state.value.remove(.gettingNewPage)
-                guard case let .value(searchResult) = signal.event else { return }
+                guard case let .success(searchResult) = event else { return }
 
                 self.currentPage = page
-                
+
                 self.state.value.if(self.repositories.value.count >= searchResult.totalCount, use: .loadedAllPages)
-                
+
                 self.repositories.value.append(contentsOf: searchResult.items)
             }
-            .add(to: self.bag)
+            .disposed(by: self.bag)
     }
 
     // MARK: -

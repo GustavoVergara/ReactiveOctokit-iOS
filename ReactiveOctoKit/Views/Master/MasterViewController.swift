@@ -8,14 +8,19 @@
 
 import UIKit
 import AlamofireImage
-import ReactiveSwift
-import ReactiveCocoa
+import RxSwift
+import RxCocoa
 
-class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MasterViewController: UIViewController, UITableViewDataSource, RxTableViewDataSourceType {
+    
+    typealias Element = [Repository]
+    
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loadingContainer: UIView!
     
+    private let bag = DisposeBag()
+
     lazy var loadingViewController: LoadingViewController! = {
         return self.childViewControllers.reduce(nil, { return $0 ?? $1 as? LoadingViewController })
     }()
@@ -33,9 +38,6 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.viewModel.getNextPage()
         
-//        self.reactive.signal(for: #selector(UITableViewDataSource.tableView(_:numberOfRowsInSection:))).observeValues { stuff in
-//            print(stuff)
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,10 +49,37 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func makeBindings() {
-        self.loadingViewController.isLoading <~ self.viewModel.state.map({ $0.contains(.gettingNewPage) })
-        self.loadingContainer.reactive.isHidden <~ self.viewModel.state.map({ !$0.contains([.gettingNewPage, .empty]) })
+        self.viewModel.state.asObservable()
+            .map { $0.contains(.gettingNewPage) }
+            .bind(to: self.loadingViewController.isLoading)
+            .disposed(by: self.bag)
+
+        self.viewModel.state.asObservable()
+            .map { !$0.contains([.gettingNewPage, .empty]) }
+            .bind(to: self.loadingContainer.rx.isHidden)
+            .disposed(by: self.bag)
         
-        self.tableView.reactive.reloadData <~ self.viewModel.repositories.signal.map { _ in () }
+        
+        self.viewModel.repositories.asObservable()
+            .bind(to: self.tableView.rx.items(cellIdentifier: "Cell"))
+            { (row, repository, cell) in
+                cell.textLabel?.text = repository.name
+                cell.detailTextLabel?.text = repository.description
+                
+                if let avatarURL = repository.owner.avatarURL {
+                    let imageFilter = AspectScaledToFillSizeWithRoundedCornersFilter(size: CGSize(width: 44, height: 44), radius: 22)
+                    let placeholder = UIImage(named: "github-octocat")?.af_imageAspectScaled(toFit: CGSize(width: 44, height: 44))
+                    cell.imageView?.af_setImage(withURL: avatarURL, placeholderImage: placeholder, filter: imageFilter)
+                }
+            }
+            .disposed(by: self.bag)
+        
+        self.tableView.rx.willDisplayCell.asObservable()
+            .map { Double($1.row) / Double(self.viewModel.repositories.value.endIndex) }
+            .filter({ $0 > 0.7 })
+            .subscribe(onNext: { _ in self.viewModel.getNextPage() })
+            .disposed(by: self.bag)
+
     }
 
     // MARK: - Segues
@@ -73,6 +102,12 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     // MARK: - Table View
     
+    func tableView(_ tableView: UITableView, observedEvent: Event<[Repository]>) {
+//        guard case let .next(repository) = observedEvent else { return }
+        
+        tableView.reloadData()
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

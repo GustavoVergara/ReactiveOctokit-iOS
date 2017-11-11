@@ -8,19 +8,19 @@
 
 import Foundation
 import Moya
-import ReactiveSwift
+import RxSwift
 
 class DetailViewModel {
     
-    private let bag = CompositeDisposable()
+    private let bag = DisposeBag()
     
     // MARK: Observables
     
-    let repository = MutableProperty<Repository?>(nil)
-            
-    let pullRequests = MutableProperty<[PullRequest]>([])
+    let repository = Variable<Repository?>(nil)
     
-    let state = MutableProperty<State>([.noRepo, .empty])
+    let pullRequests = Variable<[PullRequest]>([])
+    
+    let state = Variable<State>([.noRepo, .empty])
     
     // MARK: Provider
     
@@ -34,9 +34,16 @@ class DetailViewModel {
     // MARK: Init
     
     init() {
-        self.repository.signal.observeValues { [weak self] in self?.state.value.if($0 == nil, use: .noRepo) }?.add(to: self.bag)
-        self.repository.signal.skipNil().observeValues { [weak self] _ in self?.getNextPage() }
-        self.pullRequests.signal.observeValues { [weak self] in self?.state.value.if($0.isEmpty, use: .empty) }?.add(to: self.bag)
+        self.repository.asObservable()
+            .subscribe(onNext: { [weak self] in self?.state.value.if($0 == nil, use: .noRepo) })
+            .disposed(by: self.bag)
+        self.repository.asObservable()
+            .filter({ $0 != nil })
+            .subscribe(onNext: { [weak self] _ in self?.getNextPage()  })
+            .disposed(by: self.bag)
+        self.pullRequests.asObservable()
+            .subscribe(onNext: { [weak self] in self?.state.value.if($0.isEmpty, use: .empty) })
+            .disposed(by: self.bag)
     }
     
     // MARK: - Methods
@@ -55,12 +62,12 @@ class DetailViewModel {
         guard let repository = self.repository.value else { return }
         self.state.value.insert(.gettingNewPage)
         
-        self.gitHubAPI.reactive
+        self.gitHubAPI.rx
             .request(.pullRequests(repository: repository, page: page, pageSize: 100))
             .map([PullRequest].self, using: JSONDecoder(dateDecodingStrategy: .iso8601))
-            .start { signal in
+            .subscribe { event in
                 self.state.value.remove(.gettingNewPage)
-                guard case let .value(pullRequests) = signal.event else { return }
+                guard case let .success(pullRequests) = event else { return }
 
                 self.currentPage = page
                 
@@ -68,7 +75,7 @@ class DetailViewModel {
                 
                 self.pullRequests.value.append(contentsOf: pullRequests)
             }
-            .add(to: self.bag)
+            .disposed(by: self.bag)
     }
     
     // MARK: -
